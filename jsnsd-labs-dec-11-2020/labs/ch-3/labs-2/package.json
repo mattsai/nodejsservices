@@ -1,0 +1,11 @@
+{
+  "name": "labs-2",
+  "scripts": {
+    "start": "echo \"TODO: SET THE START SCRIPT\" && exit 1"
+  },
+  "dependencies": {
+    "@types/express": "^4.17.13",
+    "express": "^4.17.2",
+    "http-errors": "^2.0.0"
+  }
+}

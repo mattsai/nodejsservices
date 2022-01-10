@@ -1,0 +1,21 @@
+{
+  "name": "web-server-w-expres",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./bin/www"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.2",
+    "http-errors": "^1.8.1"
+  },
+  "bin": {
+    "web-server-w-expres": "www.js"
+  },
+  "devDependencies": {},
+  "description": ""
+}

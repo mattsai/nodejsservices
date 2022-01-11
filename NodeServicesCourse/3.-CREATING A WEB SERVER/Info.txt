@@ -1,0 +1,19 @@
+node -e "ht‌tp.request('ht‌tp://localhost:3000', {method: 'POST'}, (res) => res.pipe(process.stdout)).end()"
+
+
+The res object inherits from http.ServerResponse which in turn inherits from http.OutgoingMessage (an internal constructor) which then inherits from stream.Stream. For all practical purposes the res object is a writable stream, which is why calling end writes our content and also closes the connection.
+
+Notice that we use a res.status function instead of the res.statusCode property. Similarly, we can use res.send instead of res.end to write and end the response.
+This is another method added by Express that will detect the Content-Type from the input, and potentially perform additional operations. For instance, if an object was passed to res.send that object would be serialized to JSON and the response Content-Type would automatically be set to application/json.
+
+
+This is very similar to the root route. Note that we define the route path as / in this case as well, instead of /hello. This is because we'll be mounting this router at the /hello route path in app.js instead. This pattern allows for easy renaming of routes at the top level.
+
+
+------ FASTIFY - -- - - - - - - - - - -
+A Fastify plugin is a function that accepts a server instance and options as parameters.
+It may accept a third parameter, a next callback or it may return a promise
+
+The files in the routes folder are actually plugins (exported functions that return promises or use a next callback)
+A Fastify plugin is a function that takes the server instance (fastify).
+

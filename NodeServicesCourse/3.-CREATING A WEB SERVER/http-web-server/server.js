@@ -30,12 +30,18 @@ const root = `
     </body>
 </htlm>
 `
-
+const querystring = require('querystring');
 http.createServer((req,res)=>{
     res.setHeader('Content-Type','text/html')
-    const {path,pathname} = url.parse(req.url);
+    const {path,pathname} = url.parse(req.url); //deprecated
     const route2 = req.url;
-    console.log(`x1x2x3 ${path} ${pathname} r2 ${route2}`);
+    // let nuevaUrl  = new URL(`http://localhost:3000${req.url}`)
+    let nuevaUrl  = url.parse(req.url).query
+    console.log('route 2',route2)
+    console.log('req url',req.url)
+    console.log('nuevaUrl',querystring.parse(nuevaUrl))
+    // console.log('route 2',req.)
+    // console.log(`x1x2x3 ${path} ${pathname} r2 ${route2}`);
 
     const method = req.method;
     console.log('method',method)

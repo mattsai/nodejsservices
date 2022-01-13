@@ -2,20 +2,34 @@
 
 const path = require('path')
 const AutoLoad = require('fastify-autoload')
-const dev = process.env.NODE_ENV  !== 'production';
 // console.log('dev',dev,process.env.NODE_ENV)
-const fastifyStatic  = dev && require('fastify-static');
+
+const POV = require('point-of-view');
+const handlebars = require('handlebars');
+
+//nos desharemos de esto ya que usaremos point-of-view junto con handlebars de las manos parecen novios 
+// const dev = process.env.NODE_ENV  !== 'production';
+// const fastifyStatic  = dev && require('fastify-static');
 
 
 module.exports = async function (fastify, opts) {
   // Place here your custom code!
 
+  fastify.register(POV,{
+    engine:{handlebars},
+    root:path.join(__dirname,'views'),
+    layout: 'layout.hbs'
+  })
+
   // Do not touch the following lines
-  if(dev){
-    fastify.register(fastifyStatic,{
-      root:path.join(__dirname,'public')
-    })
-  }
+  // if(dev){ nos deshacemos de esto ya que usaremos point-of-view junto con handlebars
+  //   fastify.register(fastifyStatic,{
+  //     root:path.join(__dirname,'public'),
+      
+  //   })
+  // }
+
+
   // This loads all plugins defined in plugins
   // those should be support plugins that are reused
   // through your application

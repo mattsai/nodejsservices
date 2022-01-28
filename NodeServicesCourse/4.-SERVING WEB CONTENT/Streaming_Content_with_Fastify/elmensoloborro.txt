@@ -1,0 +1,32 @@
+d routes
+node -e "fs.mkdirSync('articles')"
+cd articles
+node -e "fs.openSync('index.js', 'w')"
+cd ..
+cd ..
+
+The contents of routes/articles/index.js should be as follows:
+
+'use strict'
+
+const hnLatestStream = require('hn-latest-stream')
+
+module.exports = async (fastify, opts) => {
+  fastify.get('/', async (request, reply) => {
+    const { amount = 10, type = 'html' } = request.query
+
+    if (type === 'html') reply.type('text/html')
+    if (type === 'json') reply.type('application/json')
+    return hnLatestStream(amount, type)
+  })
+}
+
+The hnLatestStream function accepts two parameters, amount and type and then returns a Node.js Stream. The amount is the number of most recent Hacker News articles we want to load and the type describes whether the stream should send HTML chunks or JSON chunks. In our route handler, we set a default amount of 10 and a default type of `'html'` while also allowing these to be overridden by a query string arguments. Depending on the desired type we also use the reply.type method to set the correct Content-Type HTTP header for the content.
+
+Returning the stream (the result of calling hnLatestStream) from the route handler instructs Fastify to safely pipe the stream to the response. The reply.send method can also be passed a stream and Fastify behaves in the same way - by piping the stream as the HTTP response.
+
+Let's see it in action. First we need to start the server with the following command:
+
+npm run dev
+
+Next we can navigate to ht‌tp://localhost:3000/articles and we should see output similar to but not the same as, the following:

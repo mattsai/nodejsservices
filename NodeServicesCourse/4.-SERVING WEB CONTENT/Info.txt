@@ -1,2 +1,18 @@
 The fastify-static module also decorates the reply object with sendFile method. We can use this to create a route that manually responds with the contents of hello.html if we wanted to alias /hello.html to /hello.
 
+la diferencia entre express y fastify
+
+ptm
+
+es que en el fastify 
+el engine: {}
+{{{}}} 3 
+para el bod ene l layout hbs
+
+
+en express y
+express --hbs  y ya genera ahi
+
+
+express res.rener
+fastify reply.view  es imporatnte el return 

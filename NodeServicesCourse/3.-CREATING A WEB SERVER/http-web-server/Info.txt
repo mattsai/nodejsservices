@@ -1,4 +1,3 @@
 The res object inherits from http.ServerResponse which in turn inherits from http.OutgoingMessage (an internal constructor) which then inherits from stream.Stream. For all practical purposes the res object is a writable stream, which is why calling end writes our content and also closes the connection.
 
- 
 node -e "ht‌tp.request('ht‌tp://localhost:3000', {method: 'POST'}, (res) => res.pipe(process.stdout)).end()"

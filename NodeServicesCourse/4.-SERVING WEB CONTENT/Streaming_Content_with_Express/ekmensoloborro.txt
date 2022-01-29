@@ -70,3 +70,19 @@ From there the code is slightly more complicated because we have to manually pro
 The stream.pipe(res, {end: false}) line tells the stream (our Hacker News stream) to write all data it receives to the res object (which is also a stream). The second parameter, an object with a property named end set to false prevents pipe from performing its default behavior of endings the destination stream (res) when the source stream (stream) has ended. This is important because without this, if there is an error in the source stream then res will be ended before our server can send an appropriate error response.
 
 Cont'd on the next page.
+
+
+
+fastify-static
+para servir contenido esteatico 
+
+module.exports = async (fastify, opts) => {
+  fastify.get('/', async (request, reply) => {
+    return reply.sendFile('hello.html')
+  })
+}
+
+
+While the primary and original focus of Fastify was for building data services, view rendering capability is available with some set up.
+
+The original focus of the Fastify framework was on building RESTful JSON services, whereas Express is more geared towards template rendering (and static serving static content). Therefore Express has these pieces built into its core whereas in Fastify template rendering is an add-on.

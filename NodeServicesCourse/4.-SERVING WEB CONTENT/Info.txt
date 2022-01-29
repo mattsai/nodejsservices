@@ -16,3 +16,18 @@ express --hbs  y ya genera ahi
 
 express res.rener
 fastify reply.view  es imporatnte el return 
+
+
+
+streaming content 
+es facil en express  solo le pones en false cuando le das el pipe, {}emd:false
+ye importar e fnished del stream y con eso jala
+bueno y fastify es lo suficientemnte bbergas para saber que es un stream y ya
+entonces basta que ke des
+const fuente = stream()
+
+return fuente
+
+y ya alv
+
+req.query -> saca los queyr params:D

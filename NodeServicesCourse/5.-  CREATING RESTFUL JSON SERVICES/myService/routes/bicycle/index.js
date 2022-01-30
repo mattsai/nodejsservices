@@ -42,9 +42,11 @@ module.exports =  async function(fastify,opts){
             return data
         } catch (error) {
             if(error.message === 'not found'){
-                throw notFound();
+                // throw notFound(); //es lo mismo en thow notFound que un return notFound
+                return notFound()
             }
-            throw error
+            // throw error
+            return error
         }
     })
 }

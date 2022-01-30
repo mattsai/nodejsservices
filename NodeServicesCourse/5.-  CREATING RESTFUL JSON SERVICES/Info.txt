@@ -9,5 +9,15 @@ A REST service should be stateless
  The result argument would hold a JavaScript object, so Fastify would know to set the response Content-Type header to application/json.
 
  Fastify es vergas
- 
 
+El exprss tambien detecta esa mmda y como le das express algo
+ya te genera el error handlig igual que el fastify alaavrga
+
+
+The Express framework has detected that the response is JSON because res.send was passed an object, and set the headers appropriately.
+
+
+node -e "http.request('http://localhost:3000/bicycles/1',{method:'POST'},res=>console.log(res.headers,res.statusCode)).end()"
+
+
+return error o return notFound en fastify y pasa chido :D 

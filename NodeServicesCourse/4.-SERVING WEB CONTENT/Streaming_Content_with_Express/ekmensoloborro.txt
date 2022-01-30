@@ -86,3 +86,11 @@ module.exports = async (fastify, opts) => {
 While the primary and original focus of Fastify was for building data services, view rendering capability is available with some set up.
 
 The original focus of the Fastify framework was on building RESTful JSON services, whereas Express is more geared towards template rendering (and static serving static content). Therefore Express has these pieces built into its core whereas in Fastify template rendering is an add-on.
+
+In this section we'll use the express-generator command-line utility to generate a new project with view rendering and static asset serving preconfigured.
+
+Let's install express-generator:
+
+npm install -g express-generator@4
+
+

@@ -1,0 +1,13 @@
+Lo que hace es detecetar un package json e integrar fastify creando pues la aplicaicón de fastify : npm init fastify -- --integrate
+
+
+metadata is communicated through HTTP headers
+operation outcomes are communicated with HTTP status codes
+The State Transfer part of REST is about shuffling state from clients to server-backends
+A REST service should be stateless
+
+ The result argument would hold a JavaScript object, so Fastify would know to set the response Content-Type header to application/json.
+
+ Fastify es vergas
+ 
+

@@ -54,11 +54,12 @@ const body = async (res) => {
 async function start () {
   const server = net.createServer().listen()
   await once(server, 'listening')
-  const { port } = server.address()
+  var { port } = server.address()
+  port = 3001
   server.close()
   await once(server, 'close')
   await writeFile(join(__dirname, 'model.js'), testingModel())
-  const sp = spawn(process.platform === 'win32' ? 'npm.cmd' : 'npm', ['start'], { env: { ...process.env, PORT: port }, stdio: ['ignore', 'ignore', 'inherit'] })
+  const sp = spawn(process.platform === 'win32' ? 'npm.cmd' : 'npm', ['start','-p',port], { env: { ...process.env, PORT: port }, stdio: ['ignore', 'ignore', 'inherit'] })
 
   try {
     await validate({ port })

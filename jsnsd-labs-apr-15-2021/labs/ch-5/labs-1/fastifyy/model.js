@@ -38,7 +38,7 @@
     }
   
     function read (id, cb) {
-      if (id === '4099') {
+      if (id === '92dc') {
         setImmediate(() => cb(Error('unknown')))
         return
       }

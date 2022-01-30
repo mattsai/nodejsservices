@@ -2,15 +2,15 @@
 
 const path = require('path')
 const AutoLoad = require('fastify-autoload')
-const fastify = require('fastify')({logger:true})
+// const fastify = require('fastify')({logger:true})
 
 
 
-async function start(){
-  await fastify.listen(3005)
-}
-start()
-
+// async function start(){
+//   await fastify.listen(3005)
+// }
+// start()
+console.log('AAA')
 module.exports = async function (fastify, opts) {
   // Place here your custom code!
   // console.log('111')

@@ -9,12 +9,18 @@ function bicycleModel(){
     }
 
     function read(id,cb){
+        console.log('id_>',id)
+        if(id==='xxx'){
+            console.log('unnow')
+            setImmediate(() => cb(Error('unknown')))
+            return
+        }
         if(!db.hasOwnProperty(id)){
             const error = Error('not found')
             return cb(error)
         }
-        setImmediate(()=>cb(null,db[id]))
-        // setImmediate(()=>cb(Error('Test para ver que pasa')))
+        // setImmediate(()=>cb(null,db[id]))
+        setImmediate(()=>cb(Error('Test para ver que pasa')))
     }
     //cuando llame a bicycle se tiene que pasar directo ya la funcion
     //bicycle(id,(err,result)=>{})

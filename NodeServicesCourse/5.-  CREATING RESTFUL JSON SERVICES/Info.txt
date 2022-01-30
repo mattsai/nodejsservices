@@ -21,3 +21,15 @@ node -e "http.request('http://localhost:3000/bicycles/1',{method:'POST'},res=>co
 
 
 return error o return notFound en fastify y pasa chido :D 
+
+
+EM EL CATH ES DONDE DA IGUAL DELSI ES UN 
+RETURN O ES UN THROW
+
+
+YA EN ELNORMALITO SI DE AWEBO VA EL REPLY.SEND EN EL FASTIFY AAA ALALALALAAA
+
+if(err.message === 'not found')reply.notFound()
+    else reply.send(err)
+    return
+este este majoer porque al final el return 

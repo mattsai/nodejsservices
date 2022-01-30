@@ -5,7 +5,7 @@
   "scripts": {
     "start": "fastify start -l info app.js",
     "test": "tap \"test/**/*.test.js\"",
-    "dev": "fastify start app.js"
+    "dev": "fastify start -w -l info -P app.js"
   },
   "keywords": [],
   "author": "",

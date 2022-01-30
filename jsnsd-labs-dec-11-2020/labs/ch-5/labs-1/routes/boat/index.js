@@ -6,8 +6,13 @@ module.exports = async function (fastify, opts) {
     const {id} =  request.params;
     read(id,(err,result)=>{
       if(err){
-        if(err.message === 'not fount') return Error('not found') 
-        else reply.send(err)
+        console.log('mensaje',err.message)
+        if(err.message === 'not found'){
+          console.log('SI'); 
+          // return Error('not found')
+          reply.send(Error('not found')) 
+        } 
+        else return err
         return
       }
       reply.send(result)

@@ -2,7 +2,7 @@
 const {boat:{read}} =  require('../../model')
 
 module.exports = async function (fastify, opts) {
-  fastify.get('/:id', function (request, reply) {
+  fastify.get('/:id', async function (request, reply) {
     const {id} =  request.params;
     // const {notFound} =  fastify.httpErrors;
     read(id,(err,result)=>{
@@ -14,8 +14,8 @@ module.exports = async function (fastify, opts) {
         // return
       }
       reply.send(result)
-      return
+      // return
     })
-
+    await reply
   })
 }

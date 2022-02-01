@@ -9,8 +9,12 @@ function bicycleModel(){
     }
 
     function uid(){
-        // if(!)
+        const key = Object.keys(db).sort((a,b)=>a-b).map(Number).filter(n=>!isNaN(n)).pop()+1 + '';
+        // console.log('key',key)
+        // setImmediate(()=>key)
+        return key
     }
+    
     function read(id,cb){
         if(!db.hasOwnProperty(id)){
             const error = Error('not found');
@@ -27,11 +31,11 @@ function bicycleModel(){
             return
         }
         db[id] = data;
-        setImmediate(()=>cb(id))
+        setImmediate(()=>cb(null,id))
     }
 
     function del(id,cb){
-        if(!db.hasOwnPropert(id)){
+        if(!db.hasOwnProperty(id)){
             const error = Error('not found')
             setImmediate(()=>cb(error))
             return
@@ -41,13 +45,14 @@ function bicycleModel(){
     }
 
     function update(id,data,cb){
-        if(!db.hasOwnPropert(id)){
+        if(!db.hasOwnProperty(id)){
             const error = Error('not found')
             setImmediate(()=>cb(error))
             return
         }
         db[id] =data;
         setImmediate(()=>cb())
+        return
     }
 
 

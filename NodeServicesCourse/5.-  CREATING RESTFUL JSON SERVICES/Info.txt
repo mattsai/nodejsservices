@@ -19,6 +19,9 @@ The Express framework has detected that the response is JSON because res.send wa
 
 node -e "http.request('http://localhost:3000/bicycles/1',{method:'POST'},res=>console.log(res.headers,res.statusCode)).end()"
 
+node -e "http.requesttroll'}}))"('http://localhost:3000/bicycles/1',{method:'put',headers:{'content-type':'application/json'}},res=>console.log(res.statusCode,res.headers)).end()
+
+node -e "http.request('http://localhost:3000/('http://localhost:3000/bicycles/1',{method:'put',headers:{'content-t},res=>console.log(res.sype':'application/json'}},res=>console.log(res.statusCode,res.headerstroll'}}))")).end(JSON.stringify({data:{queso:'badon',que:'troll'}}))"
 
 return error o return notFound en fastify y pasa chido :D 
 

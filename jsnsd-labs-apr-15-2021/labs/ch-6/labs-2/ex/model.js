@@ -27,10 +27,6 @@
     }
   
     function create (id, data, cb) {
-      if (data.brand === 'c180') {
-        setImmediate(() => cb(Error('unknown')))
-        return
-      }
       if (db.hasOwnProperty(id)) {
         const err = Error('resource exists')
         err.code = 'E_RESOURCE_EXISTS'
@@ -63,6 +59,7 @@
     }
   
     function del (id, cb) {
+
       if (!(db.hasOwnProperty(id))) {
         const err = Error('not found')
         err.code = 'E_NOT_FOUND'

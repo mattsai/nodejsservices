@@ -35,6 +35,7 @@ module.exports = async function (fastify, opts) {
         if(error.code==='E_RESOURCE_EXISTS') reply.conflict()
         else {
            reply.send(error)
+          //  reply.internalServerError()
         }
         // return
       }

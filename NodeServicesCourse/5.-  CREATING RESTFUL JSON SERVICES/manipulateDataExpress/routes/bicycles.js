@@ -88,6 +88,9 @@ router.post('/:id/update',async (req,res,next)=>{
 router.put('/:id',async (req,res,next)=>{
   const {id} = req.params;
   const {data} = req.body;
+  console.log(req.headers)
+  console.log('sisi o no1111',req.is('application/json'))
+  console.log('sisi o no222',req.headers['content-type'])
   create(id,data,(err,result)=>{
     if(err){
       if(err.message==='already exists'){
@@ -118,6 +121,9 @@ router.put('/:id',async (req,res,next)=>{
 
 router.delete('/:id',async (req,res,next)=>{
   const {id} = req.params;
+  // console.log(req.headers)
+  // console.log('sisi o no',req.is('application/json'))
+  // console.log('sisi o no',req.headers['content-type'])
   del(id,err=>{
     if(err){
       console.log('err',err.message)

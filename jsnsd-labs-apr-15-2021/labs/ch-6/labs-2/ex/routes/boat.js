@@ -18,17 +18,28 @@ router.get('/:id',function(req,res,next){
   })
 })
 
-router.delete('/:id', function(req, res, next) {
+router.delete('/:id',async  function(req, res, next) {
   const {id} = req.params;
-  del(id,err=>{
-    if(err){
-      console.log('errr->',err.code)
-      if(err.code === 'E_NOT_FOUND' )next()
-      else next(err)  
-      return
-    }
+  // const id = 'c753';
+  console.log('id',id)
+  try {
+    await delP(id)
     res.status(204).send()
-  })
+  } catch (error) {
+    if(error.code === 'E_NOT_FOUND' ) next()
+    else next(error)
+    console.log('ah si')
+    return
+  }
+  // del(id,err=>{
+  //   if(err){
+  //     console.log('errr->',err.code)
+  //     if(err.code === 'E_NOT_FOUND' )next()
+  //     else next(err)  
+  //     return
+  //   }
+  //   res.status(204).send()
+  // })
 });
 
 module.exports = router;

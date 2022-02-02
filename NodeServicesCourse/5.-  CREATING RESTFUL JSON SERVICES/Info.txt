@@ -23,6 +23,11 @@ node -e "http.requesttroll'}}))"('http://localhost:3000/bicycles/1',{method:'put
 
 node -e "http.request('http://localhost:3000/('http://localhost:3000/bicycles/1',{method:'put',headers:{'content-t},res=>console.log(res.sype':'application/json'}},res=>console.log(res.statusCode,res.headerstroll'}}))")).end(JSON.stringify({data:{queso:'badon',que:'troll'}}))"
 
+
+node -e "http.request('http://localhost:3000/bicycles',{method:'post',headers:{'content-type':'application/json'}},res=>{console.log(res.headers,res.statusCode);res.pipe(process.stdout)}).end(JSON.stringify({data:{model:'Modelo',color:'deoro'}}))"
+
+node -e "http.request('http://localhost:3000/bicycles/1/update',{method:'post',headers:{'content-type':'application/json'}},res=>res.pipe(process.stdout)).end(JSON.stringify({data:{colorado:'depiel'}}))"
+
 return error o return notFound en fastify y pasa chido :D 
 
 
@@ -36,3 +41,16 @@ if(err.message === 'not found')reply.notFound()
     else reply.send(err)
     return
 este este majoer porque al final el return 
+
+
+
+con fastify si agarra el return
+en express ocupas el next para errores
+y res.send de awebos
+
+EN EXPRESS EL PURO NEXT()
+YA ASEGURA QUE ES UN 404, NOT FOUND O:
+
+ if(err) next()
+    else res.status(204).send()
+    de a madre paps

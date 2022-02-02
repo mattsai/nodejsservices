@@ -27,6 +27,13 @@
     }
   
     function create (id, data, cb) {
+
+      // console.log('datamodel',data.model)
+      // if(data.model === 'xxx'){
+      //   setImmediate(() => cb(Error('Unnkow')))
+      //   return
+      // }
+
       if (db.hasOwnProperty(id)) {
         const err = Error('resource exists')
         err.code = 'E_RESOURCE_EXISTS'

@@ -27,6 +27,8 @@
     }
   
     function create (id, data, cb) {
+      
+
       if (db.hasOwnProperty(id)) {
         const err = Error('resource exists')
         err.code = 'E_RESOURCE_EXISTS'

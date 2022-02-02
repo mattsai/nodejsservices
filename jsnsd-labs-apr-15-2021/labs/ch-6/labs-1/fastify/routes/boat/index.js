@@ -22,8 +22,8 @@ module.exports = async function (fastify, opts) {
 
 
   fastify.post('/',async (req,reply)=>{
-    const id  = uid();
-    // const id  = 1;
+    // const id  = uid();
+    const id  = 1;
     const {data}  = req.body;
     console.log('POST',req.headers['content-type'])
     if(req.is('application/json')){
@@ -32,9 +32,9 @@ module.exports = async function (fastify, opts) {
         reply.status(201)
         reply.send({id}) 
       } catch (error) {
-        if(error.code==='E_RESOURCE_EXISTS') return conflict()
+        if(error.code==='E_RESOURCE_EXISTS') reply.conflict()
         else {
-          return error
+           reply.send(error)
         }
         // return
       }

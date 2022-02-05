@@ -8,7 +8,8 @@ const response = (res)=>{
   console.log('headers;',res.headers ,'statuscode: ',res.statusCode)
   res.on('data',console.log)
 } 
-
+//ayuda wsll
+//noo puede ser
 const options = {method:'post',headers:{'content-type':'application/json'}}
 http.request(route+'/xxx', response).end()
 http.request(route+'/2',response).end()

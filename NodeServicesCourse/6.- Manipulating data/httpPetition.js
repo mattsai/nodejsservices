@@ -2,26 +2,28 @@
 const http = require('http');
 const route = 'http://127.0.0.1:3000/bicycles'
 const data =  JSON.stringify({data:{model:'tujefe'}})
+
+
 const response = (res)=>{
-  console.log('---------')
+  // console.log('---------')
   res.setEncoding('utf8')
-  console.log('headers;',res.headers ,'statuscode: ',res.statusCode)
+  console.log('headers;',res.headers['content-type'] ,'statuscode: ',res.statusCode)
   res.on('data',console.log)
+  // res.pipe(process.stdout)
 } 
-//ayuda wsll otromas
-//noo puede ser:c xxx
-
-
 
 const options = {method:'post',headers:{'content-type':'application/json'}}
-http.request(route+'/xxx', response).end()
-http.request(route+'/2',response).end()
-// http.request(route,options,response).end(data)
-// ).end()
-// console.log(aa)
+// http.request(route+'/xxx', response).end()
+// http.request(route+'/2',response).end()
+
+http.request(route,options,response).end(data)
+
+// http.request(route,options,response).end(data))
+
 // http.request(route+'/x',res=>res.pipe(process.stdout)).end()
 // http.request(route+'/999',res=>res.pipe(process.stdout)).end()
 // http.request(route+'/xxx',res=>res.pipe(process.stdout)).end()
+
 // console.log('\n')
 
 // get

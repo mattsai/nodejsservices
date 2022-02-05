@@ -8,6 +8,12 @@ const update = promisify(bicycle.update)
 const uid = bicycle.uid
 
 
+function poison(id){
+  if(id==='xxx'){
+    throw Error('Unknow')
+  }
+}
+
 module.exports = async function (fastify, opts) {
   const {notFound,conflict} = fastify.httpErrors;
   // const {conflict} = fastify.httpErrors;
@@ -16,9 +22,7 @@ module.exports = async function (fastify, opts) {
     const {id} = request.params;
     console.log('ixd',id)
     try {
-      if (id==='xxx'){
-        throw Error('uNKNOW')
-      }
+      poison(id)
       // throw Error('Unknow')
       return await read(id)
     } catch (error) {
@@ -36,7 +40,8 @@ module.exports = async function (fastify, opts) {
     const id =  uid();
     // const id = 2
     try {
-      console.log('creado1',id)
+      poison('xxx')
+      console.log('creado2',id)
       reply.code(201)
       const idC = await create(id,data)
 

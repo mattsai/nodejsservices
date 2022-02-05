@@ -6,13 +6,19 @@ const del = promisify(bicycle.del)
 const read = promisify(bicycle.read)
 const update = promisify(bicycle.update)
 const uid = bicycle.uid
+
+
 module.exports = async function (fastify, opts) {
   const {notFound,conflict} = fastify.httpErrors;
   // const {conflict} = fastify.httpErrors;
 
   fastify.get('/:id', async function (request, reply) {
     const {id} = request.params;
+    console.log('ixd',id)
     try {
+      if (id==='xxx'){
+        throw Error('uNKNOW')
+      }
       // throw Error('Unknow')
       return await read(id)
     } catch (error) {

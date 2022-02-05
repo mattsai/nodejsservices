@@ -1,0 +1,3 @@
+mediation role sometimes known as the "front of the backend
+These are services which sit between client requests, especially from a browser-client, and backend API's which may be SOAP, RPC, database or also other REST-based APIs.
+----In this chapter we'll be implementing a service which consumes and aggregates data from other HTTP services. --

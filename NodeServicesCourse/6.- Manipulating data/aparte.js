@@ -9,7 +9,9 @@ const response = (res)=>{
   res.on('data',console.log)
 } 
 //ayuda wsll otromas
-//noo puede ser:c
+//noo puede ser:c xxx
+
+
 
 const options = {method:'post',headers:{'content-type':'application/json'}}
 http.request(route+'/xxx', response).end()

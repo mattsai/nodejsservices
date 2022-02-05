@@ -7,7 +7,7 @@ const response = (res)=>{
   res.setEncoding('utf8')
   console.log('headers;',res.headers ,'statuscode: ',res.statusCode)
   res.on('data',console.log)
-}
+} 
 
 const options = {method:'post',headers:{'content-type':'application/json'}}
 http.request(route+'/xxx', response).end()

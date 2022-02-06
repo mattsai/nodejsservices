@@ -1,7 +1,7 @@
 'use strict'
 
 const http = require('http');
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 // console.log(process.env)
 const url = require('url')
 const colors = ['Yellow', 'Red', 'Orange', 'Green', 'Blue', 'Indigo']
@@ -24,8 +24,10 @@ const server = http.createServer((req,res)=>{
         return void res.end()
     }
     res.setHeader('content-type','application/json');
-    res.end(JSON.stringify(
-                {id:id,color:colors[id%colors.length]}
-            ))
+    const data  =JSON.stringify(
+        {id:id,color:colors[id%colors.length]}
+    )
+    console.log('data',data)
+    res.end(data)
 })
 server.listen(port,()=>{console.log('Server listening on port'+port)})

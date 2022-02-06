@@ -1,3 +1,8 @@
 mediation role sometimes known as the "front of the backend
 These are services which sit between client requests, especially from a browser-client, and backend API's which may be SOAP, RPC, database or also other REST-based APIs.
 ----In this chapter we'll be implementing a service which consumes and aggregates data from other HTTP services. --
+
+Combinando request yo tomaba el id directo pero ya veo pq no ponganse pilas chavitos p3nd3j0s
+the value of the id property is taken from the bicycle object instead of from request.params.id. This is generally good hygiene and eliminates XSS reflected attacks.
+
+//got version 11 porfa porque no mames la 12 ESM ecmascript

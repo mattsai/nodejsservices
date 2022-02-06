@@ -1,6 +1,6 @@
 const http  = require('http');
 const url  = require('url');
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 const brands = ['Gazelle', 'Batavus', 'Azor', 'Cortina', 'Giant','Sparta']
 const MISSING = 3
 const server= http.createServer((req,res)=>{

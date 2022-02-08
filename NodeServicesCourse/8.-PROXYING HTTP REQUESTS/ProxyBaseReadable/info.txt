@@ -1,0 +1,1 @@
+The fastify-reply-from plugin can also be configured so that it can only proxy to a specific upstream server using the base option. In this case reply.from would be passed a path instead of a full URL and then make a request to the base URL concatenated with the path passed to reply.from. This can be useful for mapping different endpoints to a specific upstream service.

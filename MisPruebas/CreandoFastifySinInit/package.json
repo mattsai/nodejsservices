@@ -1,0 +1,14 @@
+{
+  "name": "creandofastifysininit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start":"node app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fastify": "^3.27.1"
+  }
+}

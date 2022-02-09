@@ -17,3 +17,5 @@ It may accept a third parameter, a next callback or it may return a promise
 The files in the routes folder are actually plugins (exported functions that return promises or use a next callback)
 A Fastify plugin is a function that takes the server instance (fastify).
 
+reply.type('text/html') para cambiar el content-type header
+reply.code(codigo) para enviar el statusCode

@@ -18,6 +18,14 @@ node -e "fs.openSync('hello.html', 'w')"
 
 el nombre de los archivo es el nombre de las rutas alaavrg
 
+------------
+para servir templates
+fastify.register(pointOfView, {
+    engine: { handlebars },
+    root: path.join(__dirname, 'views'),
+    layout: 'layout.hbs'
+  })
+  
 ---------------
 la diferencia entre express y fastify
 

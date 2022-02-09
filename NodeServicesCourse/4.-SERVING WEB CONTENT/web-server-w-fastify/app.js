@@ -51,7 +51,10 @@ module.exports = async function (fastify, opts) {
       return 'Method not allowed\n'
     }
     
-    res.status(404)
+    res.status(404)// desde el futuro por el fsatify-sensible
+    //puedes responder con return res.notFound(), esto manda el statusCode a 404
+    //con el respectiov mensajde  not found, o igual pudes darle
+    //fastify.httpErrors.createError(valor,'mensaje')
     return 'Not Found'
   })
 }

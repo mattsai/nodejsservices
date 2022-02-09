@@ -1,5 +1,24 @@
 The fastify-static module also decorates the reply object with sendFile method. We can use this to create a route that manually responds with the contents of hello.html if we wanted to alias /hello.html to /hello.
 
+
+npm install --save-dev fastify-static  contenido estatico fastify
+const dev = process.env.NODE_ENV !== 'production'
+const fastifyStatic = dev && require('fastify-static')
+
+if (dev) {
+    fastify.register(fastifyStatic, {
+      root: path.join(__dirname, 'public')
+    })
+  }
+
+<a hr‌ef='/hello.html'>Hello</a>
+
+node -e "fs.openSync('index.html', 'w')"
+node -e "fs.openSync('hello.html', 'w')"
+
+el nombre de los archivo es el nombre de las rutas alaavrg
+
+---------------
 la diferencia entre express y fastify
 
 ptm

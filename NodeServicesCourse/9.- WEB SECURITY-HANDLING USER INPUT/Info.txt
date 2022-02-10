@@ -1,0 +1,36 @@
+node -p "querystring.parse('name=bob')"
+
+This will output: [Object: null prototype] { name: 'bob' }.
+
+Whereas the following command:
+
+node -p "querystring.parse('name=bob&name=dave')"
+
+Will result in [Object: null prototype] { name: [ 'bob', 'dave' ] } as an output.
+
+Express also supports a square-bracket denotation syntax in query-strings, so ?name[]=bob will result in an 
+object: {name: ['bob']}. Neither Fastify nor the Node core native querystring module support this syntax.
+
+
+router.get('/', (req, res, next) => {
+  someAsynchronousOperation(() => {
+    if (!req.query.name) {
+      var err = new Error('Bad Request')
+      err.status = 400
+      next(err)
+      return
+    }
+    var parts = req.query.name.split(' ');
+    var last = parts.pop();
+    var first = parts.shift();
+    res.send({first: first, last: last});
+  })
+});
+
+The someAsynchronousOperation function doesn't exist, it's conceptually representing
+an asynchronous operation. It could be a database lookup, or a setTimeout or any kind of asynchronous work.
+
+
+Express has no way of catching unhandled exceptions that occur in asynchronous operations.
+This is why async/await syntax with Fastify is recommended, because even when errors occur in a Fastify route handler it will propagate as a promise 
+rejection into Fastify core and result in a 500 Server Error instead of crashing the service.

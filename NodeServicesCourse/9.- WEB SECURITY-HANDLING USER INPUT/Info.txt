@@ -34,3 +34,10 @@ an asynchronous operation. It could be a database lookup, or a setTimeout or any
 Express has no way of catching unhandled exceptions that occur in asynchronous operations.
 This is why async/await syntax with Fastify is recommended, because even when errors occur in a Fastify route handler it will propagate as a promise 
 rejection into Fastify core and result in a 500 Server Error instead of crashing the service.
+
+
+
+
+Finally there's one more thing we can validate: the response. At first this can seem like an odd thing to do. However, in many enterprise architectures databases can be shared, in that multiple services may read and write to the same data storage. This means when retrieving data from a remote source, we cannot entirely trust that data even if it is internal. What if another service hasn't validated input? We don't want to send malicious state to the user.
+
+There's only two cases where we send any state back. One is the first POST route, where we send back a new ID. The other is the GET route where we send the result of a read back.

@@ -10,66 +10,51 @@ const update =promisify(bicycle.update)
 
 module.exports = async function (fastify, opts) {
 
-
-  const  bodySchema = {
+  const dataSchema ={
+    type:'object',
+    additionalProperties:false,
+    required:['color','brand'],
+    properties:{
+      brand:{type:'string'},
+      color:{type:'string'}
+    }
+  }
+  const idSchema = {type:'number'}
+  const paramsSchema = {
+    id:idSchema
+  }
+  const bodySchema = {
     type:'object',
     required:['data'],
     additionalProperties:false,
     properties:{
-      data:{
-        additionalProperties:false,
-        required:['color','brand'], //,'testo'
-        properties:{
-          color: { type: 'string' },
-          brand: { type: 'string' }
-          // ,testo: { type: 'string' }
-        }
-      }
+      data:dataSchema
     }
   }
-
-  const paramsSchema = {
-      // required:['caca'],
-      id:{
-        type:'number'
-      },
-      queso:{
-        type:'number'
-      }
-  }
-
-  const qsSchema = {
-    type: 'object',
-    additionalProperties:false,
-    required:['queso'],
-    properties: {
-      queso: { type: 'string' },
-      chocolate: { type: 'string' }
-    }
-  }
-
-  const schema = {
-    body:bodySchema
-  }
-
-  fastify.get('/test/:queso',
-  {
-    schema:{
-      params:paramsSchema,
-      querystring:qsSchema
-  }}
-  ,async function (request,reply){
+  
+  fastify.get('/test/:queso',async function (request,reply){
     // console.log(request.para)
     console.log('qry',request.query)
     reply.send(request.params)
   })
 
   //GET
-  fastify.get('/:id',{schema:{params:paramsSchema}},async function (request, reply) {
+  fastify.get('/:id',
+  {
+    schema:{
+      params:paramsSchema,
+      response:{
+        200:dataSchema
+      }
+    }
+  }
+  ,async function (request, reply) {
     const {id} =  request.params;
     console.log( request.params)
     try {
       const response = await read(id);
+      console.log('r',response)
+      // return {ka: 'boom',brand:'j0t0',color:'jaja'} //para probar el 200 ok response 
       reply.send(response);
     } catch (error) {
       if(error.message==='not found') reply.notFound()
@@ -79,19 +64,22 @@ module.exports = async function (fastify, opts) {
   })
 
   // //POST - CREATE NEW ONE
-  
-  
-  
-
-  fastify.post('/', {schema},async function (request, reply) {
+  fastify.post('/',
+  {schema:{
+    body:bodySchema,
+    response:{
+      201:paramsSchema
+    }
+  }}
+  ,async function (request, reply) {
     // const {id} =  request.params;
     const id  = uid()
     const {data} =  request.body;
-    console.log('d',data)
     try {
       const responseId = await create(id,data);
+      console.log('r',responseId)
       reply.status(201);
-      return reply.send({responseId});
+      return reply.send({id:responseId});
     } catch (error) {
       if(error.message==='already exists') reply.conflict()
       else return error
@@ -100,7 +88,12 @@ module.exports = async function (fastify, opts) {
   })
 
   // //UPDATE  y si no lo encuentra lo crea
-  fastify.put('/:id', {schema},async function (request, reply) {
+  fastify.put('/:id',
+  {schema:{
+    params:paramsSchema,
+    body:bodySchema
+  }}
+  ,async function (request, reply) {
     const {id} =  request.params;
     // const id  = uid()
     const {data} =  request.body;
@@ -120,7 +113,11 @@ module.exports = async function (fastify, opts) {
   })
 
   //DELETE
-  fastify.delete('/:id', async function (request, reply) {
+  fastify.delete('/:id', {
+    schema:{
+      params:paramsSchema
+  }}
+  ,async function (request, reply) {
     const {id} =  request.params;
     // console.log('id',id)
     try {
@@ -131,6 +128,23 @@ module.exports = async function (fastify, opts) {
       if(error.message==='not found') reply.notFound()
       else return error
       return
+    }
+  })
+
+  fastify.post('/:id/update', {
+    schema: {
+      body: bodySchema,
+      params: paramsSchema
+    }
+  }, async (request, reply) => {
+    const { id } = request.params
+    const { data } = request.body
+    try {
+      await update(id, data)
+      reply.code(204)
+    } catch (err) {
+      if (err.message === 'not found') throw notFound()
+      throw err
     }
   })
 

@@ -8,10 +8,10 @@ const r= (response)=>{
 }
 
 
-// http.request(host+'/1',r).end()
+http.request(host+'/1',r).end()
 
-http.request(host+'/test/3?queso=requerido',r).end() //correcto
-http.request(host+'/test/3x?queso=requerido',r).end() //{"statusCode":400,"error":"Bad Request","message":"params.queso should be number"}
+// http.request(host+'/test/3?queso=requerido',r).end() //correcto
+// http.request(host+'/test/3x?queso=requerido',r).end() //{"statusCode":400,"error":"Bad Request","message":"params.queso should be number"}
 
 
 // http.request(host+'/test/?a=papitas&queso=badon',r).end()
@@ -25,8 +25,8 @@ const headersPost = {method:'post',headers:{'content-type':'application/json'}}
 // http.request(host,headersPost,r).end(bodyPost)
 // http.request(host,headersPost,r).end(bodyUpdate)
 // setTimeout(() => {
-//     http.request(host+'/3',r).end()
 //     http.request(host+'/4',r).end()
+//     http.request(host+'/5',r).end()
 // }, 1000);
 
 

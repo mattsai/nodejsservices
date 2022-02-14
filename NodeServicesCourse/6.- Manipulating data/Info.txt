@@ -1,0 +1,3 @@
+
+req.headers['content-type']
+req.is('application/json')

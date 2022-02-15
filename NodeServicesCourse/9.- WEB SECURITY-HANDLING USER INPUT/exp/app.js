@@ -37,7 +37,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.send({
     message:err.message,
-    status:err.statusCode || 500,
+    status:err.status || 500,
     stack:res.locals.errors
   })
 });

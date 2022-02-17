@@ -16,7 +16,8 @@ module.exports = async function (fastify, opts) {
     required:['color','brand'],
     properties:{
       brand:{type:'string'},
-      color:{type:'string'}
+      color:{type:'string'},
+      // caquencia:{type:'string'}
     }
   }
   const idSchema = {type:'number'}
@@ -54,8 +55,8 @@ module.exports = async function (fastify, opts) {
     try {
       const response = await read(id);
       console.log('r',response)
-      // return {ka: 'boom',brand:'j0t0',color:'jaja'} //para probar el 200 ok response 
-      reply.send(response);
+      // return {ka: 'boom',brand:'j0t0',color:'jaja',caquencia:'popo'} //para probar el 200 ok response 
+      // reply.send(response);
     } catch (error) {
       if(error.message==='not found') reply.notFound()
       else return error

@@ -24,11 +24,11 @@ const get = promisify((url, cb) => {
     err.method = 'GET'
     cb(err)
   })
-  req.setTimeout(1500)
+  req.setTimeout(3500)
 })
 const send = (url, { method = 'post' } = {}) => {
   const req = http.request(url, { method, headers: { 'content-type': 'application/json' } })
-  req.setTimeout(1500)
+  req.setTimeout(2000)
   return (data) => (promisify((data, cb) => {
     req
       .once('error', cb)
@@ -72,7 +72,7 @@ async function start () {
   }
 }
 
-async function validate ({ port }, retries = 0) {
+async function validate ({ port=3005 }, retries = 0) {
   let done = false
   let passed = false
   try {
@@ -88,7 +88,7 @@ async function validate ({ port }, retries = 0) {
     passed = true
   } catch (err) {
     if (err.code === 'ECONNREFUSED') {
-      await timeout(500)
+      await timeout(3500)
       return await validate({ port }, retries + 1)
     }
     done = true

@@ -1,0 +1,14 @@
+get http://localhost:3000/boat/3
+
+
+###
+post http://localhost:3000/boat/
+Content-Type: "application/json"
+
+{
+    "data":{
+        "brand":"brancito",
+        "color":"colorcito",
+        "caquita":"poposeada"
+    }
+}

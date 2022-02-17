@@ -8,8 +8,44 @@ const del = promisify(boat.del)
 
 module.exports = async (fastify, opts) => {
   const { notFound } = fastify.httpErrors
+  
+  const idValidator = {
+    type:'string'
+  }
 
-  fastify.post('/', async (request, reply) => {
+  const paramsValidator = {
+    id : idValidator
+  }
+
+  const dataValidator = {
+    type:'object',
+    required: ['brand','color'],
+    additionalProperties : false,
+    properties:{
+      brand: {type:'string'},
+      color: {type:'string'}
+    }
+  }
+  const bodyValidator = {
+    type : 'object',
+    required: ['data'],
+    additionalProperties: true,
+    properties:{
+      data:dataValidator
+    }
+  }
+
+
+  fastify.post('/',{
+    
+    schema:{
+      body:bodyValidator,
+      response:{
+        201:paramsValidator
+      }
+    }
+
+  } ,async (request, reply) => {
     const { data } = request.body
     const id = uid()
     await create(id, data)

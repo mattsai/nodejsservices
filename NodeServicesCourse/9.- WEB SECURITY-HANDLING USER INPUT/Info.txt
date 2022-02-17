@@ -41,3 +41,6 @@ rejection into Fastify core and result in a 500 Server Error instead of crashing
 Finally there's one more thing we can validate: the response. At first this can seem like an odd thing to do. However, in many enterprise architectures databases can be shared, in that multiple services may read and write to the same data storage. This means when retrieving data from a remote source, we cannot entirely trust that data even if it is internal. What if another service hasn't validated input? We don't want to send malicious state to the user.
 
 There's only two cases where we send any state back. One is the first POST route, where we send back a new ID. The other is the GET route where we send the result of a read back.
+
+
+Fastify doesn't validate responses until the response is about to be sent.

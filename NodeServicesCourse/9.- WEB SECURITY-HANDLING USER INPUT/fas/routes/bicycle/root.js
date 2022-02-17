@@ -143,8 +143,13 @@ module.exports = async function (fastify, opts) {
       await update(id, data)
       reply.code(204)
     } catch (err) {
-      if (err.message === 'not found') throw notFound()
-      throw err
+      if (err.message === 'not found') {
+        const responseId = await create(id,data);
+        // console.log('r',responseId)
+        reply.status(201);
+        return reply.send({id:responseId});
+      }
+      return err
     }
   })
 

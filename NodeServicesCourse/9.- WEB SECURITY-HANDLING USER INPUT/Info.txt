@@ -44,3 +44,7 @@ There's only two cases where we send any state back. One is the first POST route
 
 
 Fastify doesn't validate responses until the response is about to be sent.
+
+
+
+Express also supports a square-bracket denotation syntax in query-strings, so ?name[]=bob will result in an object: {name: ['bob']}. Neither Fastify nor the Node core native querystring module support this syntax.

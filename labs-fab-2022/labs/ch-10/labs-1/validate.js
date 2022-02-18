@@ -62,7 +62,7 @@ const up = promisify(function retry (port, cb) {
   if (!up.timeout) {
     up.timeout = setTimeout(() => {
       cb(new AssertionError({message: 'server did not start in time'}))
-    }, 1500).unref()
+    }, 3500).unref()
   }
   const socket = net.connect(port).unref()
     .once('error', () => (setTimeout(retry, 300, port, cb).unref()))
@@ -143,6 +143,9 @@ async function t (validator) {
 async function ok (port) {
   const url = `http://localhost:${port}/`
   const res = await get(url)
+  res.setEncoding('utf8')
+  res.on('data',console.log)
+  console.log(res.statusCode,'a',res)
   assert.equal(
     res.statusCode,
     200,

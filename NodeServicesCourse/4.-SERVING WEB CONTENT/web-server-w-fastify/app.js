@@ -21,11 +21,9 @@ module.exports = async function (fastify, opts) {
     layout: 'layout.hbs'
   })
 
-  // Do not touch the following lines
   // if(dev){ nos deshacemos de esto ya que usaremos point-of-view junto con handlebars
   //   fastify.register(fastifyStatic,{
   //     root:path.join(__dirname,'public'),
-      
   //   })
   // }
 

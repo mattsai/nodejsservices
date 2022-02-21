@@ -2,6 +2,6 @@
 
 module.exports = async function (fastify, opts) {
   fastify.get('/', async function (request, reply) {
-    return 'this is an example'
+    return reply.type('text/html').status(203).send('caquiiisiio')
   })
 }

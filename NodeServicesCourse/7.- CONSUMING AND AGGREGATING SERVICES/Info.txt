@@ -6,3 +6,9 @@ Combinando request yo tomaba el id directo pero ya veo pq no ponganse pilas chav
 the value of the id property is taken from the bicycle object instead of from request.params.id. This is generally good hygiene and eliminates XSS reflected attacks.
 
 //got version 11 porfa porque no mames la 12 ESM ecmascript
+
+
+
+En fastify es res.code || res.status
+y en express
+solo ->res.status

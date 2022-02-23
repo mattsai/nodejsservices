@@ -1,5 +1,28 @@
 fastify-reply-from
+
+express
+http.request(url,response=>{
+      // console.log('responseee',response)
+      response.pipe(res)
+    }).end()
+
+
+
 fastify-http-proxy - fácil, borras todo las opts del module.exports
 The fastify-http-proxy uses the fastify-reply-from plugin under the hood with a handler that takes all the requests, figures out the path and then passes them to reply.from.
 
-Generally speaking the upstream option would be set to some internal service that is not accessible publicly and typically it's more likely that it would be a data service of some kind (for instance, providing JSON responses).
+fastify.register(httpProxy,{
+    upstream:'https://news.ycombinator.com/',
+    async preHandler(req,reply){
+      // if(req.query.token!=='abc'){
+      //   throw fastify.httpErrors.unauthorized()
+      // }
+    }
+  })
+
+
+
+
+
+
+'Generally speaking the upstream option would be set to some internal service that is not accessible publicly and typically it's more likely that it would be a data service of some kind (for instance, providing JSON responses).

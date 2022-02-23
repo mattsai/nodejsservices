@@ -13,13 +13,13 @@ Let's install fastify-sensible:
 */
 module.exports = async function (fastify, opts) {
   // Place here your custom code!
-  fastify.register(sensible)
+  // fastify.register(sensible)
   fastify.register(httpProxy,{
     upstream:'https://news.ycombinator.com/',
     async preHandler(req,reply){
-      if(req.query.token!=='abc'){
-        throw fastify.httpErrors.unauthorized()
-      }
+      // if(req.query.token!=='abc'){
+      //   throw fastify.httpErrors.unauthorized()
+      // }
     }
   })
   // Do not touch the following lines
@@ -27,10 +27,10 @@ module.exports = async function (fastify, opts) {
   // This loads all plugins defined in plugins
   // those should be support plugins that are reused
   // through your application
-  // fastify.register(AutoLoad, {
-  //   dir: path.join(__dirname, 'plugins'),
-  //   options: Object.assign({}, opts)
-  // })
+  fastify.register(AutoLoad, {
+    dir: path.join(__dirname, 'plugins'),
+    options: Object.assign({}, opts)
+  })
 
   // This loads all plugins defined in routes
   // define your routes in one of these

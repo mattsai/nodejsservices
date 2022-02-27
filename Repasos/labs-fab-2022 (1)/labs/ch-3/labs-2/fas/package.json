@@ -1,0 +1,10 @@
+{
+  "name": "labs-2",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "dependencies": {
+    "fastify": "^3.27.2",
+    "nodemon": "^2.0.15"
+  }
+}

@@ -1,0 +1,40 @@
+get http://localhost:3000/
+
+###get
+get http://localhost:5000/232
+
+
+###get boat
+get http://localhost:3000/boat/2
+
+###get boat
+delete http://localhost:3000/boat/2
+###get boat
+post http://localhost:3000/boat/
+Content-Type: application/json
+
+{
+    "data":{
+        "mango":"pango",
+        "pengo":"pingo"
+    }
+}
+
+
+###get boat
+get http://localhost:3000/boat/3
+
+
+
+
+###post
+post http://localhost:3000/boat
+Content-Type: application/json
+
+{
+    "data":{
+        "brand":"asdasd",
+        "colorx":"aa",
+        "a":"s"
+    }
+}

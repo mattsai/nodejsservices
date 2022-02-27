@@ -13,7 +13,8 @@ module.exports = async function (fastify, opts) {
   const dataSchema ={
     type:'object',
     additionalProperties:false,
-    required:['color','brand'],
+    // required:['color','brand'],
+    required:['color','brand','descomentaesto'],
     properties:{
       brand:{type:'string'},
       color:{type:'string'},
@@ -56,7 +57,7 @@ module.exports = async function (fastify, opts) {
       const response = await read(id);
       console.log('r',response)
       // return {ka: 'boom',brand:'j0t0',color:'jaja',caquencia:'popo'} //para probar el 200 ok response 
-      // reply.send(response);
+      reply.send(response);
     } catch (error) {
       if(error.message==='not found') reply.notFound()
       else return error

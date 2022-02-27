@@ -4,7 +4,7 @@
   "scripts": {
     "test": "tap \"test/**/*.test.js\"",
     "start": "fastify start -l info app.js",
-    "dev": "fastify start -w -l info -P app.js"
+    "dev": "fastify start -w -l info -P -p 3002 app.js"
   },
   "keywords": [],
   "license": "UNLICENSED",

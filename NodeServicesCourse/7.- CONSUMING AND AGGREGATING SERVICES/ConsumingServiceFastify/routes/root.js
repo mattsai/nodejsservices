@@ -45,4 +45,49 @@ module.exports = async function (fastify, opts) {
     // console.log('bicycle',bicycle)
     // return bicycle
   })
+
+
+const validateData = {
+  additionalProperties: false,
+  required: ['queso','quesote','pito'],
+  type:'object',
+  properties:{
+    queso: {type:'string'},
+    quesote: {type:'string'},
+    pito:{type:'string'}
+  }
+}
+
+const bodySchema = {
+  type:'object',
+  required:['data','dataprueba2'],
+  additionalProperties:false,
+  properties:{
+    data:validateData
+  }
+}
+
+
+  fastify.post('/',{
+    schema:{
+      body:bodySchema,
+      response:{
+        200:validateData
+      }
+    }
+  },(req,reply)=>{
+    try {
+      console.log('a',req.body.data)
+      const datonga = req.body.data;
+      console.log('datonga',datonga)
+      reply.status(200).send(datonga)
+    } catch (error) {
+      console.log('error..',error.message)
+      if(error.message==='not found') {
+        reply.status(201);
+        return reply.send({})
+      }
+      else return error
+    }
+  })
 }

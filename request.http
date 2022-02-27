@@ -41,3 +41,19 @@ Content-Type: "application/json"
 
 ###
 get http://localhost:3000/bicycle/99
+
+
+###
+# post  http://localhost:3000/bicycle
+post  http://localhost:3000/
+Content-Type: application/application/json
+
+{
+    "data":{
+        "queso":"de perro",
+        "quesote":"no"
+    }
+}
+
+###
+get http://localhost:3000/bicycle/1

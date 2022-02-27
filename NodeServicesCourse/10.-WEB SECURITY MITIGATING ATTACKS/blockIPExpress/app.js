@@ -1,7 +1,7 @@
 const app = require('express')();
 const createError = require('http-errors')
 app.use((req,res,next)=>{
-    const ip  = res.socket.remoteAddress;
+    const ip  = res.socket.remoteAddress;//or req.ip :D
     if(ip ==='111.34.55.211'){
         next(createError(403))
         return

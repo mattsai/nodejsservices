@@ -45,6 +45,7 @@ module.exports = async function (fastify, opts) {
 
   fastify.setNotFoundHandler((req,res)=>{
     if(req.method !== 'GET'){
+      //status también puede menajrse en fasify 
       // res.status(405) //lo vi por ahi se puede mejorar con un reply.code(405).send(Error('Method not allowed')))
       return 'Method not allowed\n'
     }

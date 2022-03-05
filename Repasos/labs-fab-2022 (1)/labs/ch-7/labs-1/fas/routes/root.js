@@ -16,7 +16,7 @@ module.exports = async function (fastify, opts) {
       const opts = {timeout:1250,retry:1}
       const boatResult  = await got(boatService+id,opts).json()
       const brandResult = await got(brandService+boatResult.brand,opts).json()
-
+      
       reply.send({
         id:boatResult.id,
         color:boatResult.color,

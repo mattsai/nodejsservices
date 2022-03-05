@@ -7,7 +7,17 @@ module.exports = async function (fastify, opts) {
   // Place here your custom code!
 
   // Do not touch the following lines
-
+  fastify.addHook('onRequest',(req,reply,done)=>{
+    console.log('on request',req.ip)
+    if(req.ip === '127.0.0.1'){
+      console.log('akauak')
+      reply.unauthorized() //aqui muere la petición 
+      // console.log('asdadsa')
+      // return
+    }
+    console.log('16 16 ')
+    done()
+  })
   // This loads all plugins defined in plugins
   // those should be support plugins that are reused
   // through your application

@@ -1,0 +1,190 @@
+Initial web server
+Usando etiquetas const root = `<html> ... etc ...</html>`
+
+Las rutas direccionales deben ser /nombre
+/algo
+<a href='/algo' > clickeame </a>
+
+Fastify no detecta cuando el contenido del archivo es text/html
+Express sí.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Static content:
+Fastify: fastify-static (npm install)
+Se ocupa registrar como plugin: 
+
+#Info de lo sig
+It is a typical convention when deploying an application to set an environment variable called NODE_ENV to 'production'. This would be managed by deployment infrastructure and is outside of scope here, other than to acknowledge that it's the convention most often used to determine whether a Node.js process is running in development mode or is deployed to production (or staging). By checking that NODE_ENV is not set to production we assume development mode, which makes our dev constant true.
+
+const dev = process.env.NODE_ENV !== 'production'
+const fastifyStatic = dev && require('fastify-static')
+
+    fastify.register(fastifyStatic, {
+        root: path.join(__dirname, 'public')
+    })
+
+Ahora las rutas serán en archivos .html
+y con ruta en .html, poruq tenemos creado el contenido en la carpeta public.
+<a href='algo2.html'>clickeam2 </a>
+
+En fastify, no se ocuparía crear la ruta principal, root la agarraría al pedo.
+pero si se va a la ruta digamos "/hello" (http://localhost:3000/hello), daría error tendrías que darle hello.tml
+entonces si se declará la ruta hello en fastify, tendría que entregar un html de la siguiente forma
+
+el sendFile ya se activa al momento de instalar fastify-static
+reply.sendFile('hello.html')
+
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Using templates
+En fastify:
+    ocupas 
+            point-of-view
+            handlebars  : Handlebars is one of the template engines that point-of-view supports. See more about Handlebars at ht‌tp://handlebarsjs.com.
+
+    npm i point of view handlebars
+    y se registran como plugings
+
+    const POV = require('point-of-view')
+    const handlebars = require('handlebars')
+
+    fastify.register(POV,{
+        engine:{handlebars},
+        root: path.join(__dirname,'views'),
+        layout: 'layout.hbs'
+    })
+
+
+    Con esto activas el reply.view que te permite mandar vistas en este caso .hbs,
+    sería algo como 
+
+    index.js
+        reply.view('myview.jbs',{key:"value"})
+
+    myview.hbs
+        <h1> hola la key es  {{key}}
+
+    y el layout.hbs es un template de html:5
+    y en las etiquetas body especificar: {{{ body }}}
+
+
+    Un ejemplo de agarrar un querystring y mandarlo por la vista seria 
+        const { greeting = 'Hello '} = request.query
+        return reply.view(`hello.hbs`, { greeting })
+
+    las etiquetas de enlace volverían a la forma 
+        <a href='/hello'>Hello</a><br>
+        <a href='/hello?greeting=Ahoy'>Ahoy</a>
+
+En express:
+
+    npm install -g express-generator@4
+
+    facilito 
+    express --TEMPLATE_ENGINE --nombre_carpeta
+    express --hbs -- (ahí mismo)
+    express --hbs --newFolder
+
+    y lo único que cambiarías en vez de 
+    reply.view
+    es 
+    res.render('algo.hbs',{key:"value"})
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Streaming content in 
+
+Fastify: 
+    necesairo declarar  o si es un text -> text/html 
+    pq sino fastify detecta como un application/json-octate o algo así  
+    mismo para express
+    reply.type('application/json') 
+    res.send(MYSTREAM)
+
+express:
+    //hnls es un stream
+    res.type('application/json') o si es un text -> text/html 
+    const stream =  hnls(10,type) 
+    stream.pipe(res) //se entuba a la respuesta 
+
+    finished(stream,err=>{
+        if(err){
+            next(err)
+            return
+        }
+        res.end()
+    })
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+restFUL JSON 
+Fastify init 
+    npm init fastify -- --integrate para npm de versiones <=7 
+    npm init fastify  --integrate para npm de versiones > 7
+
+
+npm install got@11
+importante para hace rpeticiones 
+
+
+
+-----------------------------------------------------------------proxy 
+
+fastify-reply-from
+fastify-http-proxy  --express igual express-http-proxy
+
+return reply.from(url,{
+    onResponse((req,reply,res)=>{
+        res.setEncoding('utf8');
+        res.on('data',data=>{
+            reply.send(data.toUpperCase())
+        })
+    })
+
+    {
+        onResponse: (request, reply, res) => {
+            reply.removeHeader('content-length');
+            reply.send('New body of different length');
+        }
+    }
+})
+
+
+npm install fastify-reply-from
+const fp = require('fastify-plugin')
+
+module.exports = fp(async function (fastify, opts) {
+  fastify.register(require('fastify-reply-from'), {
+    errorHandler: false
+  })
+})
+
+async function * upper (res) {
+  for await (const chunk of res) {
+    yield chunk.toString().toUpperCase()
+  }
+}
+
+return reply.from(url,{
+    onResponse(req,reply,res)=>{
+        reply.send(upper(res))
+    }
+})
+
+
+const proxy = require('fastify-http-proxy')
+
+fastify.register(proxy, {
+    upstream: 'https://news.ycombinator.com/',
+    async preHandler(request, reply) {
+      if (request.query.token !== 'abc') {
+        throw fastify.httpErrors.unauthorized()
+      }
+    }
+  })

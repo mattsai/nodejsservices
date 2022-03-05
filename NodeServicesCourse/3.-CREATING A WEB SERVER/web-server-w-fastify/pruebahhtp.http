@@ -1,0 +1,6 @@
+post http://localhost:3001 
+
+###
+get http://localhost:3001/aX
+###
+POST http://localhost:3001/aX

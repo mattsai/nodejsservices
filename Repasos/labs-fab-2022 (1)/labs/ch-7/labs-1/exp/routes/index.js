@@ -15,6 +15,7 @@ const brandHost = `http://localhost:${BRAND_SERVICE_PORT}/`
 
 router.get('/:id', function (req, res, next) {
     const {id} = req.params;
+    
     got(boatHost + id,{timeout:1250,
       retry: 0}).then(({body}) => {
         body = JSON.parse(body)

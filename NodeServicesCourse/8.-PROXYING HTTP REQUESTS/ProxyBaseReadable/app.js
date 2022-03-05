@@ -6,7 +6,7 @@ const replyFrom = require('fastify-reply-from')
 module.exports = async function (fastify, opts) {
   // Place here your custom code!
   fastify.register(replyFrom,{
-    base:'http://localhost:5000',
+    // base:'http://localhost:4000',
     errorHandler: false
     // base:'http://localhost:5001' //cree un fastify desde 0 solo importando fastify.get('/') y fasitfy.listen
   })

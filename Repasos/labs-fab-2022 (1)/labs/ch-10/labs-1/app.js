@@ -21,11 +21,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req,res,next)=>{
   // 111.34.55.211
-  if(req.ip === '111.34.55.211'){
+  // if(req.ip === '111.34.55.211'){
+  if(req.ip === '127.0.0.1' || req.ip === '::1'){
   // if(req.ip === '::1'){
     next(createError(403))
+    console.log('aip')
     return 
   }
+  console.log('30300')
   next()
 })
 

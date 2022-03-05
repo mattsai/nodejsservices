@@ -8,16 +8,13 @@ async function * upper (data){
     yield chunk.toUpperCase();
   }
 }
-
-
-
 module.exports = async function (fastify, opts) {
   fastify.get('/', async function (request, reply) {
     const {url,path='algo'} =  request.query;
     console.log('url',url)
     const {httpErrors} = fastify;
     try {
-      // const aa = new URL(url)  //comentando porque en root le acivamos el base entonces ahora recibiremos un path o:
+      const aa = new URL(url)  //comentando porque en root le acivamos el base entonces ahora recibiremos un path o:
       //esto ahora es un path
       // console.log('aa',aa)
     } catch (error) {
@@ -30,7 +27,16 @@ module.exports = async function (fastify, opts) {
     //     console.log(typeof res)
     //     // console.log(res)
 
-
+    return reply.from(url,{
+      onResponse: (request, reply, res) => {
+        // reply.removeHeader('content-length');
+        res.setEncoding('utf8');
+        res.on('data',data=>{
+          console.log('data',data)
+          reply.send(data.toUpperCase());
+        })
+      }
+    })
 
     //     //seria lo mismo, esta es mi solucion pedorra porque
     //     //re es un readable entonces pues como reply.send
@@ -50,9 +56,11 @@ module.exports = async function (fastify, opts) {
     //   }
     // })
     // return reply.send('aaa')
+
+
     //aqui se activo el base y entoncs esta bien prque ahora
     //mi mono se encarga solo de redireccionar
-    return reply.from(path);
+    // return reply.from(path);
   })
 
   fastify.post('/', async function (request, reply) {

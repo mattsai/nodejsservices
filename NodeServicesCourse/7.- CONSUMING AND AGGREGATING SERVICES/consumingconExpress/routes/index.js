@@ -8,7 +8,7 @@ const myGot = callbackify(got)
 myRouter.get('/:id',(req,res,next)=>{
     const {id}=  req.params;
     console.log('id',id)
-    myGot(bicycleService+'/'+id,(err,result)=>{
+    myGot(bicycleService+'/'+id,{timeout:1250,retry:1},(err,result)=>{
         const {body} =  result;
         console.log('err',err)
         
@@ -48,4 +48,4 @@ myRouter.get('/:id',(req,res,next)=>{
     // return
 })
 
-module.exports =    ;
+module.exports =  myRouter  ;

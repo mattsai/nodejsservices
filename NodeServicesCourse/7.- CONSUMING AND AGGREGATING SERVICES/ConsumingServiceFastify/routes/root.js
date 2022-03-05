@@ -26,11 +26,11 @@ module.exports = async function (fastify, opts) {
       //aqui espera una  y luego va  aotra enroncesocuapreoms el Promise.all()para que se haga concurrent NOOO SEAS MMAOOON
       // const bicycle =  await got(`${bicycleService}/${id}`).json()
       // const brand = await got(brandService+'/'+id).json
-      return {
+      reply.send({
         id:bicycle.id,
         color:bicycle.color,
         brand:brand.name
-      }
+      })
     } catch (error) {
       if(!error.response) return   error
       console.log('errrr',error.response.statusCode)

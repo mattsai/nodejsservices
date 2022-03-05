@@ -2,7 +2,7 @@
 
 const path = require('path')
 const AutoLoad = require('fastify-autoload')
-
+const xd =  require('fastify-sensible')
 module.exports = async function (fastify, opts) {
   // Place here your custom code!
 
@@ -24,8 +24,11 @@ module.exports = async function (fastify, opts) {
   })
 
   fastify.setNotFoundHandler((req,res)=>{
+    const {httpErrors} =  res
     if(req.method !== 'GET'){
+      return res.httpErrors.methodNotAllowed()
       res.status(405)
+
       return 'Method not allowed\n'
     }
     
